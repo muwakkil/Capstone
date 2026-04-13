@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&family=Lekton:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  --font-display: 'Handjet', serif;
+  --font-body:    'Lekton', sans-serif;
+
+  --color-header:   #707070;
+  --color-sidebar:  #cecccc;
+  --color-bg:       #ddd;
+  --color-dark:     #333;
+  --color-mid:      #555;
+  --color-black:    #000;
+  --color-white:    #fff;
+
+  --accent-1: #F2D8C2;
+  --accent-2: #DB8076;
+  --accent-3: #BF2121;
+  --accent-4: #47B3DB;
+  --accent-5: #A47ED9;
+  --accent-6: #BDBF6F;
+  --accent-7: #70671A;
+  --accent-8: #592202;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-dark);
+  overflow-x: hidden;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.spin-icon {
+  animation: spin 12s linear infinite;
+  display: inline-block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
