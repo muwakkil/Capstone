@@ -14,17 +14,18 @@ export function CanvasProvider({ children }) {
 
   const canvasRef = useRef(null);
 
-  const TOTAL_SLIDES = 5; // 0-4 are toggles, pressing Next on 4 goes to create (5)
+  const TOTAL_SLIDES = 6; // 0-4 are toggles, 5 is Create, 6 is Save
 
   const canvasConfig = useMemo(() => {
-    const primaryColor     = feeling ? feeling.hex : '#cecccc';
-    const motifs           = desires.length > 0 ? desires.map(d => d.icon) : ['icon-01'];
+    const primaryColor     = feeling ? feeling.hex : '#1a1a1a';
+    const motifs           = desires.map(d => d.icon);
     const layoutMode       = phrase ? phrase.layoutMode : 'grid';
-    const contrastOpacity  = 0.2 + (passionLevel / 100) * 0.8;
-    const density          = Math.round(6 + (passionLevel / 100) * 18);
-    const bgIndex          = feeling ? FEELING_TO_BG[feeling.id] : 3;
-    const backgroundColor  = '#ddd';
-    const backgroundImage  = `url(/bgimages/bgi${bgIndex}.png)`;
+    const contrastOpacity  = 0.95;
+    const density          = 12;
+    const strokeWidth      = 1 + (passionLevel / 100) * 14; // 1px (subtle) → 15px (bold)
+    const bgIndex          = feeling ? FEELING_TO_BG[feeling.id] : null;
+    const backgroundColor  = feeling ? '#ddd' : '#f5f5f5';
+    const backgroundImage  = bgIndex ? `url(/bgimages/bgi${bgIndex}.png)` : 'none';
     const textureClass     = era ? era.textureClass : '';
     const bgTint           = era ? era.bgTint : 'transparent';
 
@@ -34,6 +35,7 @@ export function CanvasProvider({ children }) {
       layoutMode,
       contrastOpacity,
       density,
+      strokeWidth,
       backgroundColor,
       backgroundImage,
       textureClass,

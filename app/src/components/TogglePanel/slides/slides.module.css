@@ -251,3 +251,10 @@
   transition: all 0.2s;
 }
 .keepEditing:hover { background: rgba(0,0,0,0.06); }
+
+.saveHint {
+  font-size: 0.85rem;
+  color: var(--color-mid);
+  margin: 0.75rem 0 1rem;
+  line-height: 1.4;
+}

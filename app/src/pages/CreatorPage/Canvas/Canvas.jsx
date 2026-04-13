@@ -36,6 +36,7 @@ export default function Canvas() {
             y={p.y}
             rotation={p.rotation}
             opacity={p.opacity}
+            strokeWidth={p.strokeWidth}
           />
         ))}
       </div>

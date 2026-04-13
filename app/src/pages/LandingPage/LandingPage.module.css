@@ -4,9 +4,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url(/bgimages/bgi3.png);
-  background-size: cover;
-  background-position: center;
   position: relative;
   text-align: center;
   padding: 2rem;
@@ -25,17 +22,18 @@
 }
 
 .ornament {
-  width: 64px;
-  height: 64px;
+  width: 120px;
+  height: 120px;
   margin-bottom: 1.5rem;
 }
 
 .title {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 10vw, 7rem);
+  font-size: clamp(3.5rem, 12vw, 8rem);
+  font-weight: 700;
   letter-spacing: 0.12em;
   line-height: 1;
-  color: var(--color-dark);
+  color: #000000;
   margin-bottom: 0.5rem;
 }
 

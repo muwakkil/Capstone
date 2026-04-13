@@ -3,7 +3,7 @@ import styles from './MotifSvg.module.css';
 
 const svgCache = {};
 
-export default function MotifSvg({ iconId, color = '#000', size = 60, x = 0, y = 0, rotation = 0, opacity = 1 }) {
+export default function MotifSvg({ iconId, color = '#000', size = 60, x = 0, y = 0, rotation = 0, opacity = 1, strokeWidth = 1 }) {
   const [svgHtml, setSvgHtml] = useState('');
   const mounted = useRef(true);
 
@@ -12,7 +12,7 @@ export default function MotifSvg({ iconId, color = '#000', size = 60, x = 0, y =
     const url = `/icons/${iconId}.svg`;
 
     if (svgCache[url]) {
-      setSvgHtml(colorize(svgCache[url], color));
+      setSvgHtml(stylize(svgCache[url], color, strokeWidth));
       return;
     }
 
@@ -20,18 +20,18 @@ export default function MotifSvg({ iconId, color = '#000', size = 60, x = 0, y =
       .then(r => r.text())
       .then(raw => {
         svgCache[url] = raw;
-        if (mounted.current) setSvgHtml(colorize(raw, color));
+        if (mounted.current) setSvgHtml(stylize(raw, color, strokeWidth));
       })
       .catch(() => {});
 
     return () => { mounted.current = false; };
   }, [iconId]);
 
-  // Re-colorize when color changes (SVG already cached)
+  // Re-stylize when color or strokeWidth changes (SVG already cached)
   useEffect(() => {
     const url = `/icons/${iconId}.svg`;
-    if (svgCache[url]) setSvgHtml(colorize(svgCache[url], color));
-  }, [color, iconId]);
+    if (svgCache[url]) setSvgHtml(stylize(svgCache[url], color, strokeWidth));
+  }, [color, strokeWidth, iconId]);
 
   return (
     <span
@@ -49,9 +49,24 @@ export default function MotifSvg({ iconId, color = '#000', size = 60, x = 0, y =
   );
 }
 
-function colorize(svgText, color) {
-  // Replace stroke color on all path/polygon/polyline/rect elements
-  return svgText
+function stylize(svgText, color, strokeWidth) {
+  const sw = strokeWidth.toFixed(2);
+
+  // 1. Replace stroke color in the CSS <style> block
+  let result = svgText
     .replace(/stroke:\s*#[0-9a-fA-F]{3,6}/g, `stroke: ${color}`)
     .replace(/stroke="#[0-9a-fA-F]{3,6}"/g, `stroke="${color}"`);
+
+  // 2. Add inline style="stroke-width:Xpx" to every drawing element.
+  //    Inline styles always beat class rules in SVG, so this is guaranteed to work.
+  result = result.replace(
+    /<(polygon|polyline|path|rect|circle|ellipse|line)(\s[^>]*?)?(\s*\/?>)/g,
+    (match, tag, attrs = '', close) => {
+      // Strip any existing inline style so we don't double-up
+      const cleaned = attrs.replace(/\s*style="[^"]*"/, '');
+      return `<${tag}${cleaned} style="stroke-width:${sw}px"${close}`;
+    }
+  );
+
+  return result;
 }
