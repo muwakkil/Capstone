@@ -1,0 +1,307 @@
+/* Import base variables from main CSS */
+@import url('../styles.css');
+
+/* ===================================
+   ARCHIVE PAGE SPECIFIC STYLES
+   =================================== */
+
+   .archive-main {
+    padding-top: 80px;
+    min-height: 100vh;
+}
+
+.archive-hero {
+    padding: var(--spacing-xl) 2rem var(--spacing-lg);
+    background: linear-gradient(135deg, var(--color-background) 0%, #EDE7DC 100%);
+    text-align: center;
+}
+
+.archive-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-primary);
+}
+
+.archive-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-light);
+    max-width: 700px;
+    margin: 0 auto;
+    font-weight: 300;
+}
+
+/* ===================================
+   GALLERY SECTION
+   =================================== */
+
+.archive-gallery {
+    padding: var(--spacing-xl) 2rem;
+    background: var(--color-surface);
+}
+
+.gallery-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.creation-count {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--color-primary);
+}
+
+.creation-count span {
+    font-weight: 600;
+    color: var(--color-accent);
+}
+
+/* ===================================
+   GALLERY GRID
+   =================================== */
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.gallery-item {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    transition: all var(--transition-medium);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-accent);
+}
+
+.gallery-item-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    background: white;
+    cursor: pointer;
+}
+
+.gallery-item-info {
+    padding: var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gallery-item-date {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    font-family: var(--font-body);
+}
+
+.gallery-item-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-light);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color var(--transition-fast);
+    font-size: 1.2rem;
+}
+
+.action-btn:hover {
+    color: var(--color-accent);
+}
+
+.action-btn.delete:hover {
+    color: #d32f2f;
+}
+
+/* ===================================
+   EMPTY STATE
+   =================================== */
+
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-xl) 2rem;
+    display: none;
+}
+
+.empty-state.visible {
+    display: block;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    color: var(--color-border);
+    margin-bottom: var(--spacing-md);
+    font-family: var(--font-display);
+}
+
+.empty-state h3 {
+    font-size: 1.75rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-primary);
+}
+
+.empty-state p {
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-lg);
+    font-size: 1.1rem;
+}
+
+.cta-button {
+    display: inline-block;
+    background: var(--color-accent);
+    color: white;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    font-family: var(--font-body);
+    transition: all var(--transition-medium);
+}
+
+.cta-button:hover {
+    background: var(--color-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
+}
+
+/* ===================================
+   LIGHTBOX MODAL
+   =================================== */
+
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 3000;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 85vh;
+    display: block;
+    margin: 0 auto;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2.5rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    transition: transform var(--transition-fast);
+}
+
+.lightbox-close:hover {
+    transform: scale(1.1);
+}
+
+.lightbox-download {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-accent);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    transition: all var(--transition-fast);
+}
+
+.lightbox-download:hover {
+    background: var(--color-secondary);
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+
+@media (max-width: 1024px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .archive-hero {
+        padding: var(--spacing-lg) 2rem;
+    }
+    
+    .gallery-controls {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: var(--spacing-sm);
+    }
+    
+    .gallery-item-image {
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .gallery-item-image {
+        height: 300px;
+    }
+    
+    .lightbox-content {
+        max-width: 100%;
+        padding: 1rem;
+    }
+}
