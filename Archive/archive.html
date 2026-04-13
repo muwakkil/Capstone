@@ -1,0 +1,101 @@
+
+Copy
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+   
+    <link rel="stylesheet" href="archive.css">
+
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav" id="topNav">
+        <div class="nav-container">
+            <div class="nav-logo">Speaking in Motifs</div>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../index.html#introduction" class="nav-link">Introduction</a>
+                <a href="../index.html#history" class="nav-link">History</a>
+                <a href="../index.html#patterns" class="nav-link">Patterns</a>
+                <a href="../index.html#create" class="nav-link">Create</a>
+                <a href="archive.html" class="nav-link active">Archive</a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">&times;</button>
+        <div class="mobile-menu-links">
+            <a href="../index.html" class="mobile-nav-link">Home</a>
+            <a href="../index.html#introduction" class="mobile-nav-link">Introduction</a>
+            <a href="../index.html#history" class="mobile-nav-link">History</a>
+            <a href="../index.html#patterns" class="mobile-nav-link">Patterns</a>
+            <a href="../index.html#create" class="mobile-nav-link">Create</a>
+            <a href="archive.html" class="mobile-nav-link">Archive</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="archive-main">
+        <section class="archive-hero">
+            <div class="content-container">
+                <h1 class="archive-title">Community Archive</h1>
+                <p class="archive-subtitle">Compositions created by visitors, each one a unique interpretation of Syrian design traditions.</p>
+            </div>
+        </section>
+
+        <section class="archive-gallery">
+            <div class="content-container">
+                <div class="gallery-controls">
+                    <div class="creation-count">
+                        <span id="creationCount">0</span> creations archived
+                    </div>
+                    <button class="control-btn" id="clearArchive">Clear Archive</button>
+                </div>
+
+                <div class="gallery-grid" id="galleryGrid">
+                    <!-- Gallery items will be loaded here -->
+                </div>
+
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-icon">○</div>
+                    <h3>No Creations Yet</h3>
+                    <p>Be the first to create and archive a composition.</p>
+                    <a href="../index.html#create" class="cta-button">Create Now</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Syrian Design Archive — Preserving Cultural Heritage Through Digital Innovation</p>
+            <div class="footer-links">
+                <a href="../index.html">Home</a>
+                <a href="archive.html">Archive</a>
+                <a href="#" id="aboutLink">About</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="archive.js"></script>
+</body>
+</html>

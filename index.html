@@ -3,132 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C4-TM</title>
+    <title>Speaking in Motifs</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&family=Lekton:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tomorrow:wght@300;400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
+
 <body>
-    <header>
-        
-    <div class="header-left">
-        <button id="reloadButton">
-            <img src="logo.png" alt="Logo">
-        </button>
-    </div>
-    <div class="header-center">
-        <img src="fun.svg" alt="Decorative Icon" class="fun-icon">
-        <h1>ARCHIVE FRAGMENTS</h1>
-        <img src="fun.svg" alt="Decorative Icon" class="fun-icon">
-    </div>
-    <div class="header-right">
-        <button id="saveButton">SAVE</button>
-    </div>
-
-     </header>
-
-    <button class="menu-toggle" id="menuToggle">☰ MENU</button>
-    <div class="overlay" id="overlay"></div>
-
-
-    <div class="container">
-        <div class="sidebar" id="sidebar">
-    
-            <h2>CAPSTONE</h2>
-            
-
-            <h3>WHAT IS THIS?</h3>
-           
-            <p>These symbols and patterns are known as Tatreez!</p>
-            <p>Traditional Palestinian embroidery. It signifies resistance, identity, and storytelling, with motifs reflecting history, geography, and personal narratives.</p>
-            
-            <h4>INSTRUCTIONS</h4>
-            <p>Pick what background color or image you want. Click an icon to place in the box, each new block placed is a new color you can add to that specific block. Play around! Once you're satisfied, save your design. Have fun! xx</p>
-
-            <p><strong>Please be patient with the buttons, click once and wait at least 30 secs!</strong></p>
-
-            
-            <div class="divider"></div>
-
-            <!-- Color Picker -->
-            <label for="colorPicker">Block Color:</label>
-            <input type="color" id="colorPicker" value="#000000">
-
-            <div class="divider"></div>
-
-            <!-- Background Color Toggle -->
-            <button id="bgToggle">Background Color:</button>
-            
-            <div class="divider"></div>
-
-            <!-- Background Image Toggle -->
-            <button id="bgImageToggle">Background Image:</button>
-
-            <div class="divider"></div>
-
-            <!-- Inventory Page Button -->
-            <a href="gallery/index.html" id="inventoryButton">Outputs:</a>
-
-            <div class="divider"></div>
+    <!-- Intro Overlay -->
+    <div class="intro-overlay" id="introOverlay">
+        <div class="intro-motifs">
+            <div class="intro-motif" data-motif="1">
+                <img src="icons/icon-01.svg" class="motif-svg" alt="Motif 1">
+                <p>Motif 01</p>
+            </div>
+            <div class="intro-motif" data-motif="2">
+                <img src="icons/icon-02.svg" class="motif-svg" alt="Motif 2">
+                <p>Motif 02</p>
+            </div>
+            <div class="intro-motif" data-motif="3">
+                <img src="icons/icon-03.svg" class="motif-svg" alt="Motif 3">
+                <p>Motif 03</p>
+            </div>
         </div>
+    </div>
 
-        <div class="main-content">
-            <div class="media-box" id="mediaBox">
-                <!-- Blocks will be added here -->
+    <!-- Animated Background Canvas -->
+    <canvas id="backgroundCanvas"></canvas>
+
+    <!-- Fixed Header -->
+    <header class="app-header">
+        <a href="#" class="logo-link" id="logoLink">
+            <svg viewBox="0 0 50 50" class="logo-svg">
+                <circle cx="25" cy="25" r="20" fill="currentColor"/>
+                <text x="25" y="32" text-anchor="middle" fill="white" font-size="20" font-weight="bold">S</text>
+            </svg>
+        </a>
+
+        <nav class="icon-nav">
+            <button class="icon-btn" data-sidebar="welcome" title="Welcome">
+                <svg viewBox="0 0 24 24" class="icon-svg">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="currentColor"/>
+                </svg>
+            </button>
+            <button class="icon-btn" data-sidebar="introduction" title="Introduction">
+                <svg viewBox="0 0 24 24" class="icon-svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" fill="currentColor"/>
+                </svg>
+            </button>
+            <button class="icon-btn" data-sidebar="history" title="History">
+                <svg viewBox="0 0 24 24" class="icon-svg">
+                    <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z" fill="currentColor"/>
+                </svg>
+            </button>
+            <button class="icon-btn" data-sidebar="patterns" title="Patterns">
+                <svg viewBox="0 0 24 24" class="icon-svg">
+                    <path d="M4 11h5V5H4v6zm0 7h5v-6H4v6zm6 0h5v-6h-5v6zm6 0h5v-6h-5v6zm-6-7h5V5h-5v6zm6-6v6h5V5h-5z" fill="currentColor"/>
+                </svg>
+            </button>
+            <a href="Archive/archive.html" class="icon-btn" title="Archive">
+                <svg viewBox="0 0 24 24" class="icon-svg">
+                    <path d="M20.54 5.23l-1.39-1.68C18.88 3.21 18.47 3 18 3H6c-.47 0-.88.21-1.16.55L3.46 5.23C3.17 5.57 3 6.02 3 6.5V19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6.5c0-.48-.17-.93-.46-1.27zM12 17.5L6.5 12H10v-2h4v2h3.5L12 17.5zM5.12 5l.81-1h12l.94 1H5.12z" fill="currentColor"/>
+                </svg>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main App Container -->
+    <main class="app-container">
+        <!-- Left Sidebar (toggleable) -->
+        <aside class="sidebar sidebar-left" id="sidebarLeft">
+            <button class="sidebar-close" data-close="left">&times;</button>
+            <div class="sidebar-content" id="sidebarLeftContent">
+                <!-- Content loaded dynamically -->
+            </div>
+        </aside>
+
+        <!-- Center Canvas Area -->
+        <section class="canvas-section">
+            <div class="canvas-header">
+                <h2>Create Your Composition</h2>
+                <p>Select motifs and create your Syrian-inspired design</p>
             </div>
 
-            <div class="icon-container">
-                <div class="icon-container">
-                    <!-- 7 Custom SVG Symbols with descriptions -->
-                    <div class="icon" onclick="addBlock('olive_branch')">
-                        <p>⦿</p>
-                        <div class="description">Olive Branch - symbolizes resilience and rooted heritage; it embodies peace, steadfast resistance, and the enduring bond to land, uniting generations in hope and identity.</div>
-                    </div>
-                    <div class="icon" onclick="addBlock('pomegranate')">
-                        <p>❧</p>
-                        <div class="description">Pomegranate - Symbolizes fertility and abundance; its myriad seeds represent life’s richness, unity, and the cyclical nature of existence, connecting past traditions with future promise.</div>
-                    </div>
-                    <div class="icon" onclick="addBlock('mill_wheel')">
-                        <p>✺</p>
-                        <div class="description">Mill Wheel - Represents progress and community labor; its circular design reflects cycles of life, communal effort, and the transformative power of shared heritage.</div>
-                    </div>
-                    <div class="icon" onclick="addBlock('birds')">
-                        <p>🀐</p>
-                        <div class="description">Birds - Symbolizes freedom and transcendence; they convey messages of aspiration, connectivity, and transformation, reflecting the human spirit’s quest for liberation and unity eternally.</div>
-                    </div>
-                    <div class="icon" onclick="addBlock('damascus_rose')">
-                        <p>❀</p>
-                        <div class="description">Damascus Rose - Represents beauty and passionate love; its intricate petals denote strength, cultural elegance, and the blossoming of hope and unity amidst historical complexities.</div>
-                    </div>
-                    <div class="icon" onclick="addBlock('fish_net_1')">
-                        <p>❯❮</p>
-                        <div class="description">Fishnet motifs signify interconnection and protection; their overlapping patterns mirror communal bonds, weaving tales of struggle, resilience, and survival. It originates from traditional fishermen’s attire, denoting practicality, unity, and collective survival steadfastly.</div>
-                    </div>
-
-                    <div class="icon" onclick="addBlock('fish_net_2')">
-                        <p>❵❴</p>
-                        <div class="description">Fishnet motifs signify interconnection and protection; their overlapping patterns mirror communal bonds, weaving tales of struggle, resilience, and survival. It originates from traditional fishermen’s attire, denoting practicality, unity, and collective survival steadfastly.</div>
-                    </div>
+            <div class="canvas-area" id="canvasArea">
+                <div class="canvas-instructions" id="canvasInstructions">
+                    <p>Click motifs below to begin</p>
                 </div>
             </div>
-        </div>
-    
-        <!-- Tooltip -->
-        <div id="tooltip" class="tooltip"></div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
+            <div class="canvas-controls">
+                <div class="motif-selector">
+                    <div class="motif-grid" id="motifGrid">
+                        <div class="motif-option" data-motif="icon-01">
+                            <div class="motif-preview">
+                                <img src="icons/icon-01.svg" alt="Icon 1">
+                            </div>
+                            <span>Motif 1</span>
+                        </div>
+                        <div class="motif-option" data-motif="icon-02">
+                            <div class="motif-preview">
+                                <img src="icons/icon-02.svg" alt="Icon 2">
+                            </div>
+                            <span>Motif 2</span>
+                        </div>
+                        <div class="motif-option" data-motif="icon-03">
+                            <div class="motif-preview">
+                                <img src="icons/icon-03.svg" alt="Icon 3">
+                            </div>
+                            <span>Motif 3</span>
+                        </div>
+                        <div class="motif-option" data-motif="icon-04">
+                            <div class="motif-preview">
+                                <img src="icons/icon-04.svg" alt="Icon 4">
+                            </div>
+                            <span>Motif 4</span>
+                        </div>
+                        <div class="motif-option" data-motif="icon-05">
+                            <div class="motif-preview">
+                                <img src="icons/icon-05.svg" alt="Icon 5">
+                            </div>
+                            <span>Motif 5</span>
+                        </div>
+                        <div class="motif-option" data-motif="icon-06">
+                            <div class="motif-preview">
+                                <img src="icons/icon-06.svg" alt="Icon 6">
+                            </div>
+                            <span>Motif 6</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="control-btn secondary" id="clearCanvas">Clear</button>
+                    <button class="control-btn primary" id="saveCreation">Save to Archive</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Sidebar (toggleable) -->
+        <aside class="sidebar sidebar-right" id="sidebarRight">
+            <button class="sidebar-close" data-close="right">&times;</button>
+            <div class="sidebar-content" id="sidebarRightContent">
+                <!-- Content loaded dynamically -->
+            </div>
+        </aside>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="script.js"></script>
 </body>
-
 </html>
-
-
-
-<!-- PUHLEASEEEE -->
-
-<!--python -m http.server 8000 -->
