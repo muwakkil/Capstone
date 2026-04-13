@@ -34,7 +34,7 @@ function initIntroOverlay() {
                 m.style.pointerEvents = 'none';
             });
             
-            // Start fade out after animation
+            // Start fade out after animationhello
             setTimeout(() => {
                 overlay.classList.add('fade-out');
                 
