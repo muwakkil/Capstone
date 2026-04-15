@@ -15,7 +15,7 @@ export default function LearnPage() {
             <div className={styles.motifsList}>
               {section.motifs.map(m => (
                 <div key={m.icon} className={styles.motifRow}>
-                  <img src={`/icons/${m.icon}.svg`} alt={m.name} className={styles.motifIcon} />
+                  <img src={`${import.meta.env.BASE_URL}icons/${m.icon}.svg`} alt={m.name} className={styles.motifIcon} />
                   <div>
                     <div className={styles.motifName}>{m.name}</div>
                     <div className={styles.motifDesc}>{m.description}</div>

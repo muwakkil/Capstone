@@ -25,7 +25,7 @@ export function CanvasProvider({ children }) {
     const strokeWidth      = 1 + (passionLevel / 100) * 14; // 1px (subtle) → 15px (bold)
     const bgIndex          = feeling ? FEELING_TO_BG[feeling.id] : null;
     const backgroundColor  = feeling ? '#ddd' : '#f5f5f5';
-    const backgroundImage  = bgIndex ? `url(/bgimages/bgi${bgIndex}.png)` : 'none';
+    const backgroundImage  = bgIndex ? `url(${import.meta.env.BASE_URL}bgimages/bgi${bgIndex}.png)` : 'none';
     const textureClass     = era ? era.textureClass : '';
     const bgTint           = era ? era.bgTint : 'transparent';
 

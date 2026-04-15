@@ -17,7 +17,7 @@ export default function Slide2Desire() {
             className={`${styles.desireCard} ${selected.includes(d.id) ? styles.selected : ''}`}
             onClick={() => toggleDesire(d)}
           >
-            <img src={`/icons/${d.icon}.svg`} alt={d.label} className={styles.desireIcon} />
+            <img src={`${import.meta.env.BASE_URL}icons/${d.icon}.svg`} alt={d.label} className={styles.desireIcon} />
             <span className={styles.desireLabel}>{d.label}</span>
             <span className={styles.arabicLabel}>{d.arabicLabel}</span>
             <span className={styles.desireMeaning}>{d.meaning}</span>

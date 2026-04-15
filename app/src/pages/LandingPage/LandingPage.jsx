@@ -6,7 +6,7 @@ export default function LandingPage() {
   return (
     <div className={styles.page}>
 <div className={styles.content}>
-        <img src="/icons/icon-03.svg" alt="" className={`${styles.ornament} spin-icon`} />
+        <img src={`${import.meta.env.BASE_URL}icons/icon-03.svg`} alt="" className={`${styles.ornament} spin-icon`} />
         <h1 className={styles.title}>Speaking<br />in Motifs</h1>
         <p className={styles.subtitle}>Syrian Cultural Art Creator</p>
         <p className={styles.arabic}>تكلّم بالزخارف</p>

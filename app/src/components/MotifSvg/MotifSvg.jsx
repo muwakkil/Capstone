@@ -9,7 +9,7 @@ export default function MotifSvg({ iconId, color = '#000', size = 60, x = 0, y =
 
   useEffect(() => {
     mounted.current = true;
-    const url = `/icons/${iconId}.svg`;
+    const url = `${import.meta.env.BASE_URL}icons/${iconId}.svg`;
 
     if (svgCache[url]) {
       setSvgHtml(stylize(svgCache[url], color, strokeWidth));
@@ -29,7 +29,7 @@ export default function MotifSvg({ iconId, color = '#000', size = 60, x = 0, y =
 
   // Re-stylize when color or strokeWidth changes (SVG already cached)
   useEffect(() => {
-    const url = `/icons/${iconId}.svg`;
+    const url = `${import.meta.env.BASE_URL}icons/${iconId}.svg`;
     if (svgCache[url]) setSvgHtml(stylize(svgCache[url], color, strokeWidth));
   }, [color, strokeWidth, iconId]);
 
