@@ -16,7 +16,7 @@ export function CanvasProvider({ children }) {
   const TOTAL_SLIDES = 5; // 0-4 are toggles, 5 is Create
 
   const canvasConfig = useMemo(() => {
-    const primaryColor     = feeling ? feeling.hex : '#1a1a1a';
+    const primaryColor     = '#1a1a1a';
     const motifs           = desires.map(d => d.icon);
     const layoutMode       = phrase ? phrase.layoutMode : 'grid';
     const contrastOpacity  = 0.95;
