@@ -40,9 +40,16 @@
 }
 
 @media (max-width: 768px) {
-  .canvas {
-    width: min(95vw, 480px);
-    aspect-ratio: 1 / 1;
+  .wrapper {
+    padding: 0.75rem;
+    flex: none;
+    height: calc(55vh - 48px); /* viewport minus navbar (48px) minus panel (45vh) */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
-  .wrapper { padding: 0.75rem; }
+  .canvas {
+    width: 95vw;
+    aspect-ratio: 16 / 9;
+  }
 }
