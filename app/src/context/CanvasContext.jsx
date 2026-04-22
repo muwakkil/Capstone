@@ -24,8 +24,7 @@ export function CanvasProvider({ children }) {
     const strokeWidth      = 1 + (passionLevel / 100) * 14; // 1px (subtle) → 15px (bold)
     const backgroundColor  = feeling ? feeling.hex : '#f5f5f5';
     const backgroundImage  = 'none';
-    const textureClass     = era ? era.textureClass : '';
-    const bgTint           = era ? era.bgTint : 'transparent';
+    const eraImage         = era ? era.image : null;
 
     return {
       primaryColor,
@@ -36,8 +35,7 @@ export function CanvasProvider({ children }) {
       strokeWidth,
       backgroundColor,
       backgroundImage,
-      textureClass,
-      bgTint,
+      eraImage,
     };
   }, [feeling, desires, phrase, passionLevel, era]);
 

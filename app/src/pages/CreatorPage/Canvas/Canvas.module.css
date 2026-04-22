@@ -17,11 +17,14 @@
   box-shadow: 0 4px 24px rgba(0,0,0,0.18);
 }
 
-.tint {
+.eraOverlay {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 1;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.18;
 }
 
 .placeholder {

@@ -8,7 +8,7 @@ export default function Slide5Era() {
   return (
     <div>
       <div className={styles.slideTitle}>Which era speaks to you?</div>
-      <div className={styles.slideHint}>This adds a tint drawn from that period's palette.</div>
+      <div className={styles.slideHint}>This layers an image from that period behind your motifs.</div>
       <div className={styles.eraList}>
         {ERAS.map(e => (
           <div

@@ -8,17 +8,22 @@ export default function Canvas() {
   const { canvasConfig, canvasRef } = useCanvas();
   const placements = useMemo(() => generatePlacements(canvasConfig), [canvasConfig]);
 
-  const { backgroundImage, backgroundColor, bgTint, textureClass } = canvasConfig;
+  const { backgroundImage, backgroundColor, eraImage } = canvasConfig;
 
   return (
     <div className={styles.wrapper}>
       <div
         ref={canvasRef}
         id="canvasArea"
-        className={`${styles.canvas} ${textureClass}`}
+        className={styles.canvas}
         style={{ backgroundImage, backgroundColor }}
       >
-        <div className={styles.tint} style={{ background: bgTint }} />
+        {eraImage && (
+          <div
+            className={styles.eraOverlay}
+            style={{ backgroundImage: `url(${import.meta.env.BASE_URL}${eraImage})` }}
+          />
+        )}
 
         {placements.length === 0 || canvasConfig.motifs[0] === 'icon-01' && canvasConfig.desires?.length === 0 ? (
           <div className={styles.placeholder}>
