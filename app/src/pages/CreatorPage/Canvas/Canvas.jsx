@@ -5,10 +5,11 @@ import MotifSvg from '../../../components/MotifSvg/MotifSvg';
 import styles from './Canvas.module.css';
 
 export default function Canvas() {
-  const { canvasConfig, canvasRef } = useCanvas();
+  const { canvasConfig, canvasRef, feeling, desires, phrase, era } = useCanvas();
   const placements = useMemo(() => generatePlacements(canvasConfig), [canvasConfig]);
 
   const { backgroundImage, backgroundColor, eraImage } = canvasConfig;
+  const showPlaceholder = !feeling && desires.length === 0 && !phrase && !era;
 
   return (
     <div className={styles.wrapper}>
@@ -25,11 +26,11 @@ export default function Canvas() {
           />
         )}
 
-        {placements.length === 0 || canvasConfig.motifs[0] === 'icon-01' && canvasConfig.desires?.length === 0 ? (
+        {showPlaceholder && (
           <div className={styles.placeholder}>
-            choose your desires to begin
+            begin your design
           </div>
-        ) : null}
+        )}
 
         {placements.map((p, i) => (
           <MotifSvg
