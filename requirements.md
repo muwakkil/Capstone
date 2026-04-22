@@ -100,3 +100,8 @@ TRANSLATION MACHINE
 
 ### Favicon
 - Added site favicon (favicon.ico) as the domain icon across all pages
+
+### Motif Visibility on Colored Canvas
+- Motif/icon color must always remain dark (#1a1a1a) regardless of the selected feeling color
+- The feeling color is expressed only through the canvas background — it must not affect the motif stroke/fill color
+- Motifs should always be visible against the feeling background
