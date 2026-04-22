@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, useMemo, useRef } from 'react';
-import { FEELING_TO_BG } from '../data/toggleData';
 
 const CanvasContext = createContext(null);
 
@@ -14,7 +13,7 @@ export function CanvasProvider({ children }) {
 
   const canvasRef = useRef(null);
 
-  const TOTAL_SLIDES = 6; // 0-4 are toggles, 5 is Create, 6 is Save
+  const TOTAL_SLIDES = 5; // 0-4 are toggles, 5 is Create
 
   const canvasConfig = useMemo(() => {
     const primaryColor     = feeling ? feeling.hex : '#1a1a1a';
@@ -23,9 +22,8 @@ export function CanvasProvider({ children }) {
     const contrastOpacity  = 0.95;
     const density          = 12;
     const strokeWidth      = 1 + (passionLevel / 100) * 14; // 1px (subtle) → 15px (bold)
-    const bgIndex          = feeling ? FEELING_TO_BG[feeling.id] : null;
-    const backgroundColor  = feeling ? '#ddd' : '#f5f5f5';
-    const backgroundImage  = bgIndex ? `url(${import.meta.env.BASE_URL}bgimages/bgi${bgIndex}.png)` : 'none';
+    const backgroundColor  = feeling ? feeling.hex : '#f5f5f5';
+    const backgroundImage  = 'none';
     const textureClass     = era ? era.textureClass : '';
     const bgTint           = era ? era.bgTint : 'transparent';
 

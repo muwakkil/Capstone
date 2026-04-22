@@ -14,9 +14,9 @@ export default function Slide1Feeling() {
           <div
             key={f.id}
             className={`${styles.feelingCard} ${feeling?.id === f.id ? styles.selected : ''}`}
+            style={{ backgroundColor: f.hex }}
             onClick={() => setFeeling(f)}
           >
-            <div className={styles.colorCircle} style={{ background: f.hex }} />
             <span className={styles.feelingLabel}>{f.label}</span>
             <span className={styles.arabicLabel}>{f.arabicContext}</span>
           </div>

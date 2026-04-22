@@ -5,7 +5,6 @@ import Slide3Phrase   from './slides/Slide3Phrase';
 import Slide4Passion  from './slides/Slide4Passion';
 import Slide5Era      from './slides/Slide5Era';
 import SlideCreate    from './slides/SlideCreate';
-import SlideSave      from './slides/SlideSave';
 import styles from './TogglePanel.module.css';
 
 const SLIDES = [
@@ -15,10 +14,9 @@ const SLIDES = [
   Slide4Passion,
   Slide5Era,
   SlideCreate,
-  SlideSave,
 ];
 
-const SLIDE_LABELS = ['Feeling', 'Desire', 'Phrase', 'Boldness', 'Era', 'Create', 'Save'];
+const SLIDE_LABELS = ['Feeling', 'Desire', 'Phrase', 'Boldness', 'Era', 'Create'];
 
 export default function TogglePanel() {
   const { currentSlide, panelOpen, setPanelOpen, goNext, goBack, TOTAL_SLIDES } = useCanvas();
@@ -47,16 +45,16 @@ export default function TogglePanel() {
         <SlideComponent />
       </div>
 
-      {!isLast && (
-        <div className={styles.footer}>
-          <button className={styles.btn} onClick={goBack} disabled={currentSlide === 0}>
-            ← Back
-          </button>
+      <div className={styles.footer}>
+        <button className={styles.btn} onClick={goBack} disabled={currentSlide === 0}>
+          ← Back
+        </button>
+        {!isLast && (
           <button className={`${styles.btn} ${styles.btnPrimary}`} onClick={goNext}>
             Next →
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

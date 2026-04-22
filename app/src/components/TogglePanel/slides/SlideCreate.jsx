@@ -1,8 +1,22 @@
+import { useNavigate } from 'react-router-dom';
 import { useCanvas } from '../../../context/CanvasContext';
+import { useCanvasSave } from '../../../hooks/useCanvasSave';
+import { useIndexedDB } from '../../../hooks/useIndexedDB';
 import styles from './slides.module.css';
 
 export default function SlideCreate() {
-  const { feeling, desires, phrase, passionLevel, era, goNext, setPanelOpen } = useCanvas();
+  const { feeling, desires, phrase, passionLevel, era, canvasRef, setPanelOpen } = useCanvas();
+  const { saveCanvas, saving } = useCanvasSave(canvasRef);
+  const { saveImage } = useIndexedDB();
+  const navigate = useNavigate();
+
+  async function handleSave() {
+    const imageData = await saveCanvas();
+    if (imageData) {
+      await saveImage(imageData);
+      navigate('/archive');
+    }
+  }
 
   return (
     <div className={styles.createSlide}>
@@ -31,8 +45,8 @@ export default function SlideCreate() {
         </div>
       </div>
 
-      <button className={styles.createBtn} onClick={goNext}>
-        Create
+      <button className={styles.createBtn} onClick={handleSave} disabled={saving}>
+        {saving ? 'Saving...' : 'Save to Archive'}
       </button>
 
       <br />
