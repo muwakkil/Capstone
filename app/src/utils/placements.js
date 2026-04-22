@@ -46,6 +46,28 @@ export function generatePlacements(canvasConfig) {
         rotation = rand() * 360;
         break;
       }
+      case 'fruitoflife': {
+        // Fruit of Life: 1 center + 6 inner ring + 6 outer ring (13 nodes total)
+        // y-radius is scaled by 16/9 to compensate for the 16:9 canvas so rings look circular
+        const folPositions = (() => {
+          const cx = 50, cy = 50;
+          const xr1 = 12, yr1 = xr1 * (16 / 9); // inner ring
+          const xr2 = 24, yr2 = xr2 * (16 / 9); // outer ring
+          const pts = [[cx, cy]];
+          for (let k = 0; k < 6; k++) {
+            const a = (k / 6) * 2 * Math.PI;
+            pts.push([cx + xr1 * Math.cos(a), cy + yr1 * Math.sin(a)]);
+          }
+          for (let k = 0; k < 6; k++) {
+            const a = (k / 6) * 2 * Math.PI;
+            pts.push([cx + xr2 * Math.cos(a), cy + yr2 * Math.sin(a)]);
+          }
+          return pts;
+        })();
+        [x, y] = folPositions[i % folPositions.length];
+        rotation = 0;
+        break;
+      }
       case 'dense': {
         const cols = Math.ceil(Math.sqrt(density * 1.8));
         const col  = i % cols;

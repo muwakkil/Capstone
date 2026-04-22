@@ -79,7 +79,7 @@ export const PHRASES = [
     arabic: 'من عيوني',
     transliteration: "min 3youni",
     translation: 'From my eyes — with all the love I have',
-    layoutMode: 'dense',
+    layoutMode: 'fruitoflife',
   },
 ];
 
