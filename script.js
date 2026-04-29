@@ -2,12 +2,51 @@
 // INITIALIZATION
 // ===================================
 document.addEventListener('DOMContentLoaded', function() {
+    initCurtain();
     initIntroOverlay();
     initBackgroundCanvas();
     initSidebarToggles();
     initCreationTool();
     initDatabase();
 });
+
+// ===================================
+// CURTAIN INTERACTION
+// ===================================
+function initCurtain() {
+    const curtainLeft = document.getElementById('curtainLeft');
+    const curtainRight = document.getElementById('curtainRight');
+
+    if (!curtainLeft || !curtainRight) return;
+
+    let opened = false;
+    let startX = null;
+    let startY = null;
+    const MOVE_THRESHOLD = 30; // px of movement required before opening
+
+    // Wait 600ms after load before listening, so any phantom mousemove on load is ignored
+    setTimeout(function() {
+        document.addEventListener('mousemove', function onMove(e) {
+            if (opened) return;
+
+            if (startX === null) {
+                startX = e.clientX;
+                startY = e.clientY;
+                return;
+            }
+
+            const dx = Math.abs(e.clientX - startX);
+            const dy = Math.abs(e.clientY - startY);
+
+            if (dx > MOVE_THRESHOLD || dy > MOVE_THRESHOLD) {
+                opened = true;
+                curtainLeft.classList.add('curtain-open');
+                curtainRight.classList.add('curtain-open');
+                document.removeEventListener('mousemove', onMove);
+            }
+        });
+    }, 600);
+}
 
 // ===================================
 // INTRO OVERLAY INTERACTION
