@@ -1,40 +1,54 @@
 .curtainPanel {
   position: fixed;
   top: 0;
-  height: 100vh;
-  width: 26vw;
+  height: 100dvh;
+  width: 70vw;
   z-index: 100;
   overflow: hidden;
   pointer-events: none;
   transition: transform 1.4s cubic-bezier(0.77, 0, 0.175, 1);
+  display: flex;
+  align-items: center;
+  filter: drop-shadow(0 0 60px rgba(0, 0, 0, 0.45));
 }
 
-/* Closed: both panels meet in the center */
 .curtainLeft {
   left: 0;
-  transform: translateX(24vw);
+  justify-content: flex-end;
+  transform: translateX(calc(-12vw + 8px));
 }
 
 .curtainRight {
   right: 0;
-  transform: translateX(-24vw);
+  justify-content: flex-start;
+  transform: translateX(calc(12vw - 8px));
 }
 
 .curtainPanel img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  height: 142dvh;
+  width: auto;
   display: block;
+  flex-shrink: 0;
 }
 
-/* Open: slide to sides, stay visible with a margin */
+/* Open: slide to sides, slivers remain visible */
 .curtainLeft.curtainOpen {
-  transform: translateX(2vw);
+  transform: translateX(calc(-100% + 10vw));
 }
 
 .curtainRight.curtainOpen {
-  transform: translateX(-2vw);
+  transform: translateX(calc(100% - 10vw));
+}
+
+/* Laptop and up: stick out more */
+@media (min-width: 1024px) {
+  .curtainLeft.curtainOpen {
+    transform: translateX(calc(-100% + 21vw));
+  }
+
+  .curtainRight.curtainOpen {
+    transform: translateX(calc(100% - 21vw));
+  }
 }
 
 .page {
@@ -46,6 +60,7 @@
   position: relative;
   text-align: center;
   padding: 2rem;
+  overflow: hidden;
 }
 
 .overlay {

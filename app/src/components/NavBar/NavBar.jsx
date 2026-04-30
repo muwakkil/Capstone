@@ -1,12 +1,21 @@
 import { useState } from 'react';
-import { NavLink, Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useCanvas } from '../../context/CanvasContext';
+import { useCurtain } from '../../context/CurtainContext';
 import styles from './NavBar.module.css';
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
   const { resetAll } = useCanvas();
+  const { curtainNavigate } = useCurtain();
+
+  const handleNav = (path) => {
+    setOpen(false);
+    if (pathname !== path) {
+      curtainNavigate(path);
+    }
+  };
 
   return (
     <>
@@ -19,7 +28,7 @@ export default function NavBar() {
         >
           <span /><span /><span />
         </button>
-        <Link to="/" className={styles.title}>Speaking in Motifs</Link>
+        <button className={styles.title} onClick={() => handleNav('/')}>Speaking in Motifs</button>
         {pathname === '/create' && (
           <button className={styles.resetBtn} onClick={resetAll}>Reset</button>
         )}
@@ -33,27 +42,24 @@ export default function NavBar() {
         <div className={styles.sidebarHeader}>
           <button className={styles.closeBtn} onClick={() => setOpen(false)} aria-label="Close navigation">✕</button>
         </div>
-        <NavLink
-          to="/create"
-          className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
-          onClick={() => setOpen(false)}
+        <button
+          className={`${styles.link} ${pathname === '/create' ? styles.active : ''}`}
+          onClick={() => handleNav('/create')}
         >
           Create
-        </NavLink>
-        <NavLink
-          to="/archive"
-          className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
-          onClick={() => setOpen(false)}
+        </button>
+        <button
+          className={`${styles.link} ${pathname === '/archive' ? styles.active : ''}`}
+          onClick={() => handleNav('/archive')}
         >
           Archive
-        </NavLink>
-        <NavLink
-          to="/learn"
-          className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
-          onClick={() => setOpen(false)}
+        </button>
+        <button
+          className={`${styles.link} ${pathname === '/learn' ? styles.active : ''}`}
+          onClick={() => handleNav('/learn')}
         >
           Learn
-        </NavLink>
+        </button>
       </nav>
     </>
   );

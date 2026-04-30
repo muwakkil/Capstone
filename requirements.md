@@ -105,3 +105,27 @@ TRANSLATION MACHINE
 - Motif/icon color must always remain dark (#1a1a1a) regardless of the selected feeling color
 - The feeling color is expressed only through the canvas background — it must not affect the motif stroke/fill color
 - Motifs should always be visible against the feeling background
+
+### Landing Page — Curtain Reveal Animation (Updated)
+- Uses `installation_ill.3.svg` (wider viewBox ~794×792) for both left and right curtain panels
+- Right curtain panel is horizontally mirrored via `scaleX(-1)`
+- Curtain panels: `height: 142dvh`, `width: 70vw`, centered vertically with `align-items: center`
+- Drop shadow on curtains: `filter: drop-shadow(0 0 60px rgba(0,0,0,0.45))` applied at panel level (not image) so shadow bleeds past overflow boundary
+- Closed state: panels overlap slightly at center — `translateX(calc(-12vw + 8px))` left, `translateX(calc(12vw - 8px))` right
+- Trigger: reactive mouse-move (opens when mouse moves >60px from initial position, with 800ms mount delay)
+- Failsafe: if user does not move mouse within 8 seconds, curtains auto-open
+- Open state (phones, <1024px): `translateX(calc(-100% + 10vw))` — slivers remain visible on sides
+- Open state (laptop, ≥1024px): `translateX(calc(-100% + 21vw))` — more of illustration visible
+- SVG fill color: `#648967`, fully opaque (`opacity: 1`)
+- Landing page curtain is its own isolated system — distinct from global page-transition curtain
+
+### Global Curtain Page Transition System
+- `CurtainContext` (context/CurtainContext.jsx): manages `curtainOpen` state and exposes `curtainNavigate(path)` and `openCurtain()`
+- `CurtainOverlay` (components/CurtainOverlay/): renders curtain panels globally, hidden on landing page (`pathname === '/'`)
+- On any non-landing page mount: curtains auto-open using double `requestAnimationFrame` for smooth CSS transition
+- Global open state: curtains slide completely off screen (`translateX(-100%)` / `translateX(100%)`) — full page content visible
+- `curtainNavigate(path)`: closes curtains (1.4s transition) → navigates → new page opens with curtains closed → curtains auto-open
+- NavBar navigation uses `curtainNavigate` for all page links; same-page clicks are no-ops
+- Landing page "Start" button closes its own local curtains (1.4s), then calls `navigate('/create')` directly — avoids double-timing
+- Curtain z-index: 500 — above toggle panel (200), nav overlay (300), and sidebar (400)
+- Transition easing: `cubic-bezier(0.77, 0, 0.175, 1)` over 1.4s

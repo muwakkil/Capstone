@@ -1,5 +1,7 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { CanvasProvider } from './context/CanvasContext';
+import { CurtainProvider } from './context/CurtainContext';
+import CurtainOverlay from './components/CurtainOverlay/CurtainOverlay';
 import NavBar       from './components/NavBar/NavBar';
 import LandingPage  from './pages/LandingPage/LandingPage';
 import CreatorPage  from './pages/CreatorPage/CreatorPage';
@@ -11,7 +13,8 @@ function AppInner() {
   const showNav = pathname !== '/';
 
   return (
-    <>
+    <CurtainProvider>
+      <CurtainOverlay />
       {showNav && <NavBar />}
       <Routes>
         <Route path="/"        element={<LandingPage />} />
@@ -19,7 +22,7 @@ function AppInner() {
         <Route path="/archive" element={<GalleryPage />} />
         <Route path="/learn"   element={<LearnPage />} />
       </Routes>
-    </>
+    </CurtainProvider>
   );
 }
 

@@ -1,0 +1,42 @@
+.curtainPanel {
+  position: fixed;
+  top: 0;
+  height: 100dvh;
+  width: 70vw;
+  z-index: 500;
+  overflow: hidden;
+  pointer-events: none;
+  transition: transform 1.4s cubic-bezier(0.77, 0, 0.175, 1);
+  display: flex;
+  align-items: center;
+  filter: drop-shadow(0 0 60px rgba(0, 0, 0, 0.45));
+}
+
+/* Closed: panels overlap slightly at center */
+.curtainLeft {
+  left: 0;
+  justify-content: flex-end;
+  transform: translateX(calc(-12vw + 8px));
+}
+
+.curtainRight {
+  right: 0;
+  justify-content: flex-start;
+  transform: translateX(calc(12vw - 8px));
+}
+
+.curtainPanel img {
+  height: 142dvh;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* Open: slide completely off screen — full page visible */
+.curtainLeft.curtainOpen {
+  transform: translateX(-100%);
+}
+
+.curtainRight.curtainOpen {
+  transform: translateX(100%);
+}
