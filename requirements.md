@@ -129,3 +129,13 @@ TRANSLATION MACHINE
 - Landing page "Start" button closes its own local curtains (1.4s), then calls `navigate('/create')` directly — avoids double-timing
 - Curtain z-index: 500 — above toggle panel (200), nav overlay (300), and sidebar (400)
 - Transition easing: `cubic-bezier(0.77, 0, 0.175, 1)` over 1.4s
+
+### Curtain Closed-State Overlap — Responsive Fix (April 2026)
+- Closed-state transform uses `calc(-14vw + 100px)` for both landing page and global overlay curtains
+- `clip-path` used instead of `overflow: hidden` to allow outer edges to bleed off-screen freely on all screen sizes, including mobile with positive translateX
+- Left panel: `clip-path: inset(0 -80px 0 -300vw)` — bleeds outer (left) edge, allows 80px shadow spread on inner (right) side
+- Right panel: `clip-path: inset(0 -300vw 0 -80px)` — bleeds outer (right) edge, allows 80px shadow spread on inner (left) side
+- On phone (< ~643px): translateX becomes positive, panels shift past center for more overlap — outer bleed handled by clip-path
+- On laptop: translateX stays negative (~-101px at 1440px), outer edges naturally off-screen
+- Landing page open state: 10vw sliver on phones, 21vw on laptops (≥ 1024px)
+- Global overlay open state: fully off-screen (`translateX(-100%)` / `translateX(100%)`)
