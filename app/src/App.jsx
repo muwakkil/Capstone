@@ -7,13 +7,15 @@ import LandingPage  from './pages/LandingPage/LandingPage';
 import CreatorPage  from './pages/CreatorPage/CreatorPage';
 import GalleryPage  from './pages/GalleryPage/GalleryPage';
 import LearnPage    from './pages/LearnPage/LearnPage';
+import useIdleRedirect from './hooks/useIdleRedirect';
 
-function AppInner() {
+function AppRoutes() {
   const { pathname } = useLocation();
   const showNav = pathname !== '/';
+  useIdleRedirect();
 
   return (
-    <CurtainProvider>
+    <>
       <CurtainOverlay />
       {showNav && <NavBar />}
       <Routes>
@@ -22,6 +24,14 @@ function AppInner() {
         <Route path="/archive" element={<GalleryPage />} />
         <Route path="/learn"   element={<LearnPage />} />
       </Routes>
+    </>
+  );
+}
+
+function AppInner() {
+  return (
+    <CurtainProvider>
+      <AppRoutes />
     </CurtainProvider>
   );
 }

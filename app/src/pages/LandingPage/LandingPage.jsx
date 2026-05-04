@@ -15,6 +15,14 @@ export default function LandingPage() {
   };
 
   useEffect(() => {
+    const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+    if (isTouch) {
+      // On touch devices there's no mouse — auto-open after a short dramatic pause
+      const timer = setTimeout(() => setOpen(true), 1000);
+      return () => clearTimeout(timer);
+    }
+
     let initialX = null;
     let initialY = null;
 

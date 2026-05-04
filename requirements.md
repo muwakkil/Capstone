@@ -112,8 +112,9 @@ TRANSLATION MACHINE
 - Curtain panels: `height: 142dvh`, `width: 70vw`, centered vertically with `align-items: center`
 - Drop shadow on curtains: `filter: drop-shadow(0 0 60px rgba(0,0,0,0.45))` applied at panel level (not image) so shadow bleeds past overflow boundary
 - Closed state: panels overlap slightly at center — `translateX(calc(-12vw + 8px))` left, `translateX(calc(12vw - 8px))` right
-- Trigger: reactive mouse-move (opens when mouse moves >60px from initial position, with 800ms mount delay)
-- Failsafe: if user does not move mouse within 8 seconds, curtains auto-open
+- Trigger: reactive mouse-move (opens when mouse moves >60px from initial position, with 800ms mount delay) — desktop only
+- On touch/mobile devices (`hover: none` + `pointer: coarse`): curtains auto-open after 1 second (no mouse available)
+- Failsafe: if user does not move mouse within 8 seconds, curtains auto-open (desktop only)
 - Open state (phones, <1024px): `translateX(calc(-100% + 10vw))` — slivers remain visible on sides
 - Open state (laptop, ≥1024px): `translateX(calc(-100% + 21vw))` — more of illustration visible
 - SVG fill color: `#648967`, fully opaque (`opacity: 1`)
@@ -129,6 +130,14 @@ TRANSLATION MACHINE
 - Landing page "Start" button closes its own local curtains (1.4s), then calls `navigate('/create')` directly — avoids double-timing
 - Curtain z-index: 500 — above toggle panel (200), nav overlay (300), and sidebar (400)
 - Transition easing: `cubic-bezier(0.77, 0, 0.175, 1)` over 1.4s
+
+### Idle Redirect — Display / Kiosk Mode
+- After 60 seconds of no user activity on any non-landing page, the site automatically returns to the landing page
+- Uses `useIdleRedirect` hook (hooks/useIdleRedirect.js), called inside `AppRoutes` (a child of `CurtainProvider`)
+- Activity events that reset the timer: `mousemove`, `mousedown`, `keydown`, `touchstart`, `scroll`
+- Redirect uses `curtainNavigate('/')` — curtains close (1.4s), navigate to `/`, landing page curtains reopen automatically
+- Hook is a no-op on the landing page (`pathname === '/'`) to avoid interfering with the landing curtain system
+- Designed for exhibition/kiosk use: resets the experience for the next visitor after inactivity
 
 ### Curtain Closed-State Overlap — Responsive Fix (April 2026)
 - Closed-state transform uses `calc(-14vw + 100px)` for both landing page and global overlay curtains
