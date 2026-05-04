@@ -139,6 +139,14 @@ TRANSLATION MACHINE
 - Hook is a no-op on the landing page (`pathname === '/'`) to avoid interfering with the landing curtain system
 - Designed for exhibition/kiosk use: resets the experience for the next visitor after inactivity
 
+### Deployment — GitHub Pages SPA Routing Fix
+- Site is hosted at `https://muwakkil.github.io/Capstone/` via GitHub Pages (static file host)
+- GitHub Pages does not support client-side routing — direct links, reloads, or back-button navigation to any sub-route (e.g. `/Capstone/create`) would return "file not found"
+- Fix: `app/public/404.html` intercepts GitHub's 404, immediately redirects to the root with the intended route encoded as a query param (e.g. `/?/create`)
+- A decode script in `app/index.html` reads that query param on load and uses `history.replaceState` to restore the correct URL before React Router mounts
+- Result: direct URLs, QR code opens in browser, reloads, and back-button all work correctly — URL stays unchanged, user never sees an error
+- Deploy triggers automatically via GitHub Actions on push to `yledits` branch
+
 ### Curtain Closed-State Overlap — Responsive Fix (April 2026)
 - Closed-state transform uses `calc(-14vw + 100px)` for both landing page and global overlay curtains
 - `clip-path` used instead of `overflow: hidden` to allow outer edges to bleed off-screen freely on all screen sizes, including mobile with positive translateX
