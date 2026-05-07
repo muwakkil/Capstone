@@ -156,3 +156,30 @@ TRANSLATION MACHINE
 - On laptop: translateX stays negative (~-101px at 1440px), outer edges naturally off-screen
 - Landing page open state: 10vw sliver on phones, 21vw on laptops (≥ 1024px)
 - Global overlay open state: fully off-screen (`translateX(-100%)` / `translateX(100%)`)
+
+### Typography — Font System (May 2026)
+- **Display font** (`--font-display`): `'Source Code Pro', monospace` — used for all titles, headers, UI labels, and buttons
+- **Body font** (`--font-body`): `'Lekton', sans-serif` — used for body text
+- **Arabic font** (`--font-arabic`): `'Handjet', serif` — used exclusively for all Arabic text content (`.arabic`, `.arabicLabel`, `.phraseArabic`, `.summaryArabic`)
+- Google Fonts import: `Handjet` (wght 100–900) + `Lekton` (ital, wght 400/700) + `Source Code Pro` (ital, wght 200–900)
+- Global heading rule: `h1–h6 { font-family: var(--font-display); font-weight: 700; }`
+- Landing page `<title>` text is `text-transform: uppercase`
+- **No `letter-spacing`** on any element using `--font-display` — removed site-wide due to Source Code Pro's natural monospace spacing
+
+### Fluid Responsive Scaling (May 2026)
+- **Design principle**: everything scales continuously with viewport width — no hard pixel ceilings anywhere, only small minimums for readability
+- `html { font-size: max(14px, 1.1vw) }` — base font scales up indefinitely; all `rem` values inherit this scaling automatically
+- All `clamp(min, vw, MAX)` patterns replaced with `max(min, vw)` — upper caps removed throughout
+- Landing page title: `font-size: max(2rem, 10vw)` — subtitle: `max(0.9rem, 2.5vw)` — Arabic: `max(1rem, 3vw)` — ornament: `max(80px, 8vw)`
+- NavBar top bar: `height: max(48px, 4vw)` — title: `max(0.9rem, 1.5vw)` — sidebar: `max(200px, 16vw)`
+- Toggle panel: `width: max(280px, 20vw)` — no ceiling
+- LearnPage: `max-width: max(600px, 55vw)` — no ceiling
+- Gallery grid: `minmax(max(260px, 22vw), 1fr)`
+- CreatorPage height: `calc(100vh - max(48px, 4vw))` — tracks fluid navbar
+
+### Canvas Sizing & Toggle Panel Constraint (May 2026)
+- Canvas must always be fully visible — must never slide under the toggle panel
+- Canvas is **viewport-centered** at all times
+- Width formula: `calc(100vw - max(560px, 40vw) - 3rem)` — subtracts 2× the toggle panel width (mirrored left and right) so the canvas stays symmetrically centered with equal clearance on both sides
+- `max-height: 80vh` prevents canvas from becoming taller than the viewport on ultra-wide screens
+- Mobile override (`≤768px`): `width: 95vw`, wrapper height constrained to `calc(55vh - max(48px, 4vw))`

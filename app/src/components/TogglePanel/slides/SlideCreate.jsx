@@ -33,7 +33,7 @@ export default function SlideCreate() {
         </div>
         <div className={styles.summaryItem}>
           <span className={styles.summaryKey}>Phrase</span>
-          <span>{phrase ? phrase.arabic : '—'}</span>
+          <span className={styles.summaryArabic}>{phrase ? phrase.arabic : '—'}</span>
         </div>
         <div className={styles.summaryItem}>
           <span className={styles.summaryKey}>Intensity</span>

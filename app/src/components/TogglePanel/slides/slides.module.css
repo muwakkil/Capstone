@@ -1,7 +1,6 @@
 .slideTitle {
   font-family: var(--font-display);
   font-size: 1.3rem;
-  letter-spacing: 0.1em;
   margin-bottom: 0.3rem;
 }
 
@@ -38,11 +37,11 @@
 .feelingLabel {
   font-family: var(--font-display);
   font-size: 0.85rem;
-  letter-spacing: 0.05em;
   color: rgba(0,0,0,0.75);
 }
 
 .arabicLabel {
+  font-family: var(--font-arabic);
   font-size: 0.9rem;
   color: rgba(0,0,0,0.55);
 }
@@ -78,7 +77,6 @@
 .desireLabel {
   font-family: var(--font-display);
   font-size: 0.9rem;
-  letter-spacing: 0.05em;
 }
 
 .desireMeaning {
@@ -106,7 +104,7 @@
 .phraseCard.selected { border-color: var(--color-dark); }
 
 .phraseArabic {
-  font-family: var(--font-display);
+  font-family: var(--font-arabic);
   font-size: 1.5rem;
   direction: rtl;
   margin-bottom: 0.2rem;
@@ -152,7 +150,6 @@
   font-size: 2rem;
   text-align: center;
   margin-top: 0.5rem;
-  letter-spacing: 0.05em;
 }
 
 /* Era slide */
@@ -176,7 +173,6 @@
 .eraName {
   font-family: var(--font-display);
   font-size: 1rem;
-  letter-spacing: 0.08em;
 }
 
 .eraPeriod {
@@ -211,9 +207,13 @@
 
 .summaryKey {
   font-family: var(--font-display);
-  letter-spacing: 0.05em;
   min-width: 70px;
   color: var(--color-mid);
+}
+
+.summaryArabic {
+  font-family: var(--font-arabic);
+  direction: rtl;
 }
 
 .createBtn {
@@ -221,7 +221,6 @@
   padding: 0.75rem;
   font-family: var(--font-display);
   font-size: 1.2rem;
-  letter-spacing: 0.15em;
   background: var(--color-dark);
   color: var(--color-white);
   border: none;
@@ -239,7 +238,6 @@
   color: var(--color-dark);
   font-family: var(--font-display);
   font-size: 0.85rem;
-  letter-spacing: 0.08em;
   padding: 0.4rem 1rem;
   cursor: pointer;
   margin-top: 0.5rem;

@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&family=Lekton:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&family=Lekton:ital,wght@0,400;0,700;1,400&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
 :root {
-  --font-display: 'Handjet', serif;
+  --font-display: 'Source Code Pro', monospace;
   --font-body:    'Lekton', sans-serif;
+  --font-arabic:  'Handjet', serif;
 
   --color-header:   #707070;
   --color-sidebar:  #cecccc;
@@ -28,7 +29,14 @@
   box-sizing: border-box;
 }
 
-html, body, #root {
+html {
+  height: 100%;
+  width: 100%;
+  /* Fluid base: minimum 14px, scales up with viewport width indefinitely */
+  font-size: max(14px, 1.1vw);
+}
+
+body, #root {
   height: 100%;
   width: 100%;
 }
@@ -38,6 +46,11 @@ body {
   background: var(--color-bg);
   color: var(--color-dark);
   overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
 }
 
 @keyframes spin {
