@@ -10,7 +10,7 @@ export function useCanvasSave(canvasRef) {
     try {
       const canvas = await html2canvas(canvasRef.current, {
         backgroundColor: '#ffffff',
-        scale: 2,
+        scale: 1,
         useCORS: true,
       });
 
@@ -20,7 +20,7 @@ export function useCanvasSave(canvasRef) {
           reader.onloadend = () => resolve(reader.result);
           reader.onerror   = reject;
           reader.readAsDataURL(blob);
-        }, 'image/png');
+        }, 'image/jpeg', 0.82);
       });
     } finally {
       setSaving(false);

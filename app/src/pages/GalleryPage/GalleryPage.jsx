@@ -1,8 +1,8 @@
-import { useIndexedDB } from '../../hooks/useIndexedDB';
+import { useFirebaseArchive } from '../../hooks/useFirebaseArchive';
 import styles from './GalleryPage.module.css';
 
 export default function GalleryPage() {
-  const { images, loading, clearImages } = useIndexedDB();
+  const { images, loading, clearImages } = useFirebaseArchive();
 
   function handleClear() {
     const pw = prompt('Enter password to clear the archive:');
@@ -35,7 +35,7 @@ export default function GalleryPage() {
               <span className={styles.timestamp}>{formatDate(item.timestamp)}</span>
               <a
                 href={item.image}
-                download={`speaking-in-motifs-${item.id}.png`}
+                download={`speaking-in-motifs-${item.id}.jpg`}
                 className={styles.downloadBtn}
               >
                 Download

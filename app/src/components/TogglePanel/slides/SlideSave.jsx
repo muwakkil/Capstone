@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { useCanvas } from '../../../context/CanvasContext';
 import { useCanvasSave } from '../../../hooks/useCanvasSave';
-import { useIndexedDB } from '../../../hooks/useIndexedDB';
+import { useFirebaseArchive } from '../../../hooks/useFirebaseArchive';
 import styles from './slides.module.css';
 
 export default function SlideSave() {
   const { canvasRef, setPanelOpen } = useCanvas();
   const { saveCanvas, saving } = useCanvasSave(canvasRef);
-  const { saveImage } = useIndexedDB();
+  const { saveImage } = useFirebaseArchive();
   const navigate = useNavigate();
 
   async function handleSave() {
