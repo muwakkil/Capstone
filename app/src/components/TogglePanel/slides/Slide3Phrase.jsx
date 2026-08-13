@@ -7,7 +7,7 @@ export default function Slide3Phrase() {
 
   return (
     <div>
-      <div className={styles.slideTitle}>A phrase for today</div>
+      <div className={styles.slideTitle}>Which phrase will inspire your motif?</div>
       <div className={styles.slideHint}>Your choice shapes how your motifs arrange themselves.</div>
       <div className={styles.phraseList}>
         {PHRASES.map(p => (

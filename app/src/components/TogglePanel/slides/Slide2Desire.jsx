@@ -8,7 +8,7 @@ export default function Slide2Desire() {
 
   return (
     <div>
-      <div className={styles.slideTitle}>What do you desire?</div>
+      <div className={styles.slideTitle}>What meaning do you want your creation to carry?</div>
       <div className={styles.slideHint}>Choose up to 3. Each shapes your composition.</div>
       <div className={styles.desireGrid}>
         {DESIRES.map(d => (

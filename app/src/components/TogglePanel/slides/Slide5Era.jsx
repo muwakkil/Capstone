@@ -7,7 +7,7 @@ export default function Slide5Era() {
 
   return (
     <div>
-      <div className={styles.slideTitle}>Which era speaks to you?</div>
+      <div className={styles.slideTitle}>What Syrian Visual Context connects to you?</div>
       <div className={styles.slideHint}>This layers an image from that period behind your motifs.</div>
       <div className={styles.eraList}>
         {ERAS.map(e => (

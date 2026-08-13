@@ -1,4 +1,5 @@
 import { useCanvas } from '../../context/CanvasContext';
+import Slide0Intro    from './slides/Slide0Intro';
 import Slide1Feeling  from './slides/Slide1Feeling';
 import Slide2Desire   from './slides/Slide2Desire';
 import Slide3Phrase   from './slides/Slide3Phrase';
@@ -8,15 +9,16 @@ import SlideCreate    from './slides/SlideCreate';
 import styles from './TogglePanel.module.css';
 
 const SLIDES = [
-  Slide1Feeling,
+  Slide0Intro,
   Slide2Desire,
+  Slide5Era,
   Slide3Phrase,
   Slide4Passion,
-  Slide5Era,
+  Slide1Feeling,
   SlideCreate,
 ];
 
-const SLIDE_LABELS = ['Feeling', 'Desire', 'Phrase', 'Boldness', 'Era', 'Create'];
+const SLIDE_LABELS = ['Intro', 'Meaning', 'Era', 'Phrase', 'Boldness', 'Feeling', 'Create'];
 
 export default function TogglePanel() {
   const { currentSlide, panelOpen, setPanelOpen, goNext, goBack, TOTAL_SLIDES } = useCanvas();
@@ -46,13 +48,21 @@ export default function TogglePanel() {
       </div>
 
       <div className={styles.footer}>
-        <button className={styles.btn} onClick={goBack} disabled={currentSlide === 0}>
-          ← Back
-        </button>
-        {!isLast && (
+        {currentSlide === 0 ? (
           <button className={`${styles.btn} ${styles.btnPrimary}`} onClick={goNext}>
-            Next →
+            Begin Creating
           </button>
+        ) : (
+          <>
+            <button className={styles.btn} onClick={goBack}>
+              ← Back
+            </button>
+            {!isLast && (
+              <button className={`${styles.btn} ${styles.btnPrimary}`} onClick={goNext}>
+                Next →
+              </button>
+            )}
+          </>
         )}
       </div>
     </div>

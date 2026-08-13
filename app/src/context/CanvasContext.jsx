@@ -13,7 +13,7 @@ export function CanvasProvider({ children }) {
 
   const canvasRef = useRef(null);
 
-  const TOTAL_SLIDES = 5; // 0-4 are toggles, 5 is Create
+  const TOTAL_SLIDES = 6; // 0 is Intro, 1-5 are toggles, 6 is Create
 
   const canvasConfig = useMemo(() => {
     const primaryColor     = '#1a1a1a';
