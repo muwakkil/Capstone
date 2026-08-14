@@ -8,7 +8,7 @@ function seededRandom(seed) {
 }
 
 export function generatePlacements(canvasConfig) {
-  const { motifs, layoutMode, density, contrastOpacity, primaryColor, strokeWidth = 1 } = canvasConfig;
+  const { motifs, layoutMode, density, contrastOpacity, primaryColor, strokeWidth = 1, motifBaseSize = 100 } = canvasConfig;
   if (!motifs || motifs.length === 0) return [];
   const placements = [];
   const rand = seededRandom(42);
@@ -16,7 +16,7 @@ export function generatePlacements(canvasConfig) {
   for (let i = 0; i < density; i++) {
     const motif    = motifs[i % motifs.length];
     const isSecondary = motifs.length > 1 && i % motifs.length !== 0;
-    const size     = isSecondary ? 72 : 100;
+    const size     = isSecondary ? motifBaseSize * 0.72 : motifBaseSize;
     const opacity  = isSecondary ? contrastOpacity * 0.85 : contrastOpacity;
     let x, y, rotation;
 

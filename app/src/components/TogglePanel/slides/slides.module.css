@@ -165,6 +165,12 @@
   margin-top: 0.5rem;
 }
 
+.sliderDivider {
+  border: none;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  margin: 1.2rem 0;
+}
+
 /* Era slide */
 .eraList {
   display: flex;

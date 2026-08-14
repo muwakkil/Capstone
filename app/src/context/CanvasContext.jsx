@@ -7,6 +7,7 @@ export function CanvasProvider({ children }) {
   const [desires, setDesires]           = useState([]);
   const [phrase, setPhrase]             = useState(null);
   const [passionLevel, setPassionLevel] = useState(50);
+  const [intentionSize, setIntentionSize] = useState(50);
   const [era, setEra]                   = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [panelOpen, setPanelOpen]       = useState(true);
@@ -22,6 +23,7 @@ export function CanvasProvider({ children }) {
     const contrastOpacity  = 0.95;
     const density          = layoutMode === 'fruitoflife' ? 13 : 12;
     const strokeWidth      = 1 + (passionLevel / 100) * 14; // 1px (subtle) → 15px (bold)
+    const motifBaseSize    = 40 + (intentionSize / 100) * 210; // 40px (small) → 250px (large)
     const backgroundColor  = feeling ? feeling.hex : '#f5f5f5';
     const backgroundImage  = 'none';
     const eraImage         = era ? era.image : null;
@@ -33,11 +35,12 @@ export function CanvasProvider({ children }) {
       contrastOpacity,
       density,
       strokeWidth,
+      motifBaseSize,
       backgroundColor,
       backgroundImage,
       eraImage,
     };
-  }, [feeling, desires, phrase, passionLevel, era]);
+  }, [feeling, desires, phrase, passionLevel, intentionSize, era]);
 
   function toggleDesire(desire) {
     setDesires(prev => {
@@ -53,6 +56,7 @@ export function CanvasProvider({ children }) {
     setDesires([]);
     setPhrase(null);
     setPassionLevel(50);
+    setIntentionSize(50);
     setEra(null);
     setCurrentSlide(0);
     setPanelOpen(true);
@@ -72,6 +76,7 @@ export function CanvasProvider({ children }) {
       desires, toggleDesire,
       phrase, setPhrase,
       passionLevel, setPassionLevel,
+      intentionSize, setIntentionSize,
       era, setEra,
       currentSlide, setCurrentSlide,
       panelOpen, setPanelOpen,
