@@ -20,7 +20,7 @@ export function CanvasProvider({ children }) {
     const motifs           = desires.map(d => d.icon);
     const layoutMode       = phrase ? phrase.layoutMode : 'grid';
     const contrastOpacity  = 0.95;
-    const density          = 12;
+    const density          = layoutMode === 'fruitoflife' ? 13 : 12;
     const strokeWidth      = 1 + (passionLevel / 100) * 14; // 1px (subtle) → 15px (bold)
     const backgroundColor  = feeling ? feeling.hex : '#f5f5f5';
     const backgroundImage  = 'none';

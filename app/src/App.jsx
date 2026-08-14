@@ -7,12 +7,9 @@ import LandingPage  from './pages/LandingPage/LandingPage';
 import CreatorPage  from './pages/CreatorPage/CreatorPage';
 import GalleryPage  from './pages/GalleryPage/GalleryPage';
 import LearnPage    from './pages/LearnPage/LearnPage';
-import useIdleRedirect from './hooks/useIdleRedirect';
-
 function AppRoutes() {
   const { pathname } = useLocation();
   const showNav = pathname !== '/';
-  useIdleRedirect();
 
   return (
     <>
