@@ -8,6 +8,7 @@ export function CanvasProvider({ children }) {
   const [phrase, setPhrase]             = useState(null);
   const [passionLevel, setPassionLevel] = useState(50);
   const [intentionSize, setIntentionSize] = useState(50);
+  const [motifColor, setMotifColor]       = useState('#1a1a1a');
   const [era, setEra]                   = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [panelOpen, setPanelOpen]       = useState(true);
@@ -17,7 +18,7 @@ export function CanvasProvider({ children }) {
   const TOTAL_SLIDES = 6; // 0 is Intro, 1-5 are toggles, 6 is Create
 
   const canvasConfig = useMemo(() => {
-    const primaryColor     = '#1a1a1a';
+    const primaryColor     = motifColor;
     const motifs           = desires.map(d => d.icon);
     const layoutMode       = phrase ? phrase.layoutMode : 'grid';
     const contrastOpacity  = 0.95;
@@ -40,7 +41,7 @@ export function CanvasProvider({ children }) {
       backgroundImage,
       eraImage,
     };
-  }, [feeling, desires, phrase, passionLevel, intentionSize, era]);
+  }, [feeling, desires, phrase, passionLevel, intentionSize, motifColor, era]);
 
   function toggleDesire(desire) {
     setDesires(prev => {
@@ -57,6 +58,7 @@ export function CanvasProvider({ children }) {
     setPhrase(null);
     setPassionLevel(50);
     setIntentionSize(50);
+    setMotifColor('#1a1a1a');
     setEra(null);
     setCurrentSlide(0);
     setPanelOpen(true);
@@ -77,6 +79,7 @@ export function CanvasProvider({ children }) {
       phrase, setPhrase,
       passionLevel, setPassionLevel,
       intentionSize, setIntentionSize,
+      motifColor, setMotifColor,
       era, setEra,
       currentSlide, setCurrentSlide,
       panelOpen, setPanelOpen,

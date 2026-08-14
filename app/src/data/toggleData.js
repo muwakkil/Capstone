@@ -121,6 +121,17 @@ export const ERAS = [
   },
 ];
 
+export const MOTIF_COLORS = [
+  { id: 'dark',     label: 'Dark',     hex: '#1a1a1a' },
+  { id: 'white',    label: 'White',    hex: '#f5f5f5' },
+  { id: 'serenity', label: 'Serenity', hex: '#47B3DB' },
+  { id: 'passion',  label: 'Passion',  hex: '#BF2121' },
+  { id: 'joy',      label: 'Joy',      hex: '#BDBF6F' },
+  { id: 'grief',    label: 'Grief',    hex: '#70671A' },
+  { id: 'hope',     label: 'Hope',     hex: '#F2D8C2' },
+  { id: 'longing',  label: 'Longing',  hex: '#A47ED9' },
+];
+
 // Maps feeling id to bgimage index (1-10)
 export const FEELING_TO_BG = {
   serenity: 4,

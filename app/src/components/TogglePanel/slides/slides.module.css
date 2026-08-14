@@ -171,6 +171,30 @@
   margin: 1.2rem 0;
 }
 
+/* Motif color dots */
+.colorDotGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.colorDot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.15s, border-color 0.15s;
+}
+.colorDot:hover { transform: scale(1.15); }
+.colorDotSelected {
+  border-color: var(--color-dark);
+  box-shadow: 0 0 0 2px var(--color-dark);
+  transform: scale(1.15);
+}
+
 /* Era slide */
 .eraList {
   display: flex;

@@ -1,9 +1,9 @@
 import { useCanvas } from '../../../context/CanvasContext';
-import { FEELINGS } from '../../../data/toggleData';
+import { FEELINGS, MOTIF_COLORS } from '../../../data/toggleData';
 import styles from './slides.module.css';
 
 export default function Slide1Feeling() {
-  const { feeling, setFeeling } = useCanvas();
+  const { feeling, setFeeling, motifColor, setMotifColor } = useCanvas();
 
   return (
     <div>
@@ -20,6 +20,23 @@ export default function Slide1Feeling() {
             <span className={styles.feelingLabel}>{f.label}</span>
             <span className={styles.arabicLabel}>{f.arabicContext}</span>
           </div>
+        ))}
+      </div>
+
+      <div className={styles.sliderDivider} />
+
+      <div className={styles.slideTitle}>Motif color</div>
+      <div className={styles.slideHint}>Choose the color of your motifs.</div>
+      <div className={styles.colorDotGrid}>
+        {MOTIF_COLORS.map(c => (
+          <button
+            key={c.id}
+            className={`${styles.colorDot} ${motifColor === c.hex ? styles.colorDotSelected : ''}`}
+            style={{ backgroundColor: c.hex }}
+            onClick={() => setMotifColor(c.hex)}
+            aria-label={c.label}
+            title={c.label}
+          />
         ))}
       </div>
     </div>
