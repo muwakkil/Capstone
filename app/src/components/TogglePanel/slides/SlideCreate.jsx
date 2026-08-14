@@ -5,7 +5,7 @@ import { useFirebaseArchive } from '../../../hooks/useFirebaseArchive';
 import styles from './slides.module.css';
 
 export default function SlideCreate() {
-  const { feeling, desires, phrase, passionLevel, era, canvasRef, setPanelOpen } = useCanvas();
+  const { feeling, desires, phrase, passionLevel, intentionSize, motifColor, era, canvasRef, setPanelOpen } = useCanvas();
   const { saveCanvas, saving } = useCanvasSave(canvasRef);
   const { saveImage } = useFirebaseArchive();
   const navigate = useNavigate();
@@ -24,24 +24,52 @@ export default function SlideCreate() {
 
       <div className={styles.summaryList}>
         <div className={styles.summaryItem}>
-          <span className={styles.summaryKey}>Feeling</span>
-          <span>{feeling ? feeling.label : '—'}</span>
+          <span className={styles.summaryKey}>Meaning</span>
+          <span>{desires.length > 0 ? desires.map(d => d.label).join(', ') : '—'}</span>
         </div>
         <div className={styles.summaryItem}>
-          <span className={styles.summaryKey}>Desires</span>
-          <span>{desires.length > 0 ? desires.map(d => d.label).join(', ') : '—'}</span>
+          <span className={styles.summaryKey}>Era</span>
+          <span>{era ? era.label : '—'}</span>
         </div>
         <div className={styles.summaryItem}>
           <span className={styles.summaryKey}>Phrase</span>
           <span className={styles.summaryArabic}>{phrase ? phrase.arabic : '—'}</span>
         </div>
         <div className={styles.summaryItem}>
-          <span className={styles.summaryKey}>Intensity</span>
+          <span className={styles.summaryKey}>Size</span>
+          <span>{intentionSize}%</span>
+        </div>
+        <div className={styles.summaryItem}>
+          <span className={styles.summaryKey}>Boldness</span>
           <span>{passionLevel}%</span>
         </div>
         <div className={styles.summaryItem}>
-          <span className={styles.summaryKey}>Era</span>
-          <span>{era ? era.label : '—'}</span>
+          <span className={styles.summaryKey}>Feeling</span>
+          <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            {feeling ? feeling.label : '—'}
+            <span
+              title="Background color"
+              style={{
+                display: 'inline-block',
+                width: 14,
+                height: 14,
+                borderRadius: '50%',
+                backgroundColor: feeling ? feeling.hex : 'transparent',
+                border: '1px solid rgba(0,0,0,0.2)',
+              }}
+            />
+            <span
+              title="Motif color"
+              style={{
+                display: 'inline-block',
+                width: 14,
+                height: 14,
+                borderRadius: '50%',
+                backgroundColor: motifColor,
+                border: '1px solid rgba(0,0,0,0.2)',
+              }}
+            />
+          </span>
         </div>
       </div>
 
